@@ -9,17 +9,17 @@ namespace ProyectoFinalConsola.Model
     public class Producto
     {
         private int _idProducto;
-        private string _descripcion;
+        private string _descripciones;
         private double _costo;
         private double _precioVenta;
         private int _stock;
         private int _idUsuario;
 
         //Constructor
-        public Producto(int idProducto, string descripcion, double costo, double precioVenta, int stock, int idUsuario)
+        public Producto(int idProducto, string descripciones, double costo, double precioVenta, int stock, int idUsuario)
         {
             this._idProducto = idProducto;
-            this._descripcion = descripcion;
+            this._descripciones = descripciones;
             this._costo = costo;
             this._precioVenta = precioVenta;
             this._stock = stock;
@@ -32,10 +32,10 @@ namespace ProyectoFinalConsola.Model
             get { return this._idProducto; }
             set { this._idProducto = value; }
         }
-        public string Descripcion
+        public string Descripciones
         {
-            get { return this._descripcion; }
-            set { this._descripcion = value; }
+            get { return this._descripciones; }
+            set { this._descripciones = value; }
         }
         public double Costo
         {

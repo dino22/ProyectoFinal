@@ -38,7 +38,7 @@ namespace ProyectoFinalConsola.Model
             get { return this._stock; }
             set { this._stock = value; }
         }
-        public int IDVenta
+        public int IdVenta
         {
             get { return this._idVenta; }
             set { this._idVenta = value; }
