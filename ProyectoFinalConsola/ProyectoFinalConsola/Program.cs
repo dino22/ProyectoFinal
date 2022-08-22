@@ -10,6 +10,8 @@ namespace ProyectoFinalConsola
         {
             int idUsuario = 2;
 
+            string nombreUsuario = "eperez";
+            string contraseña = "SoyErnestoPerez";
 
             ProductoHandler productoHandler = new ProductoHandler();
 
@@ -19,6 +21,8 @@ namespace ProyectoFinalConsola
             UsuarioHandler usuarioHandler = new UsuarioHandler();
 
             usuarioHandler.TraerUsuario(idUsuario);
+
+            usuarioHandler.ValidarUsuario(nombreUsuario, contraseña);
 
             
             ProductoVendidoHandler productoVendidoHandler = new ProductoVendidoHandler();

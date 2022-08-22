@@ -38,7 +38,7 @@ namespace ProyectoFinalConsola.Handlers
             }
             return usuario;
         }
-        
+
         public List<Usuario> TraerTodosLosUsuarios()
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -49,7 +49,7 @@ namespace ProyectoFinalConsola.Handlers
                     sqlConnection.Open();
 
                     using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
-                    {   
+                    {
                         if (dataReader.HasRows)
                         {
                             while (dataReader.Read())
@@ -153,27 +153,34 @@ namespace ProyectoFinalConsola.Handlers
                 sqlConnection.Close();
             }
         }
-        public void ValidarUsuario(Usuario usuario)
+        public Usuario ValidarUsuario(string nombreUsuario, string contraseña)
         {
+            Usuario usuario = new Usuario();
+
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
                 {
-                    string querySelect = "SELEC NombreUsuario, Contraseña FROM Usuario WHERE NombreUsuario = @nombreUsuario AND Contraseña = @contrseña";
+                    string queryUser = "SELEC NombreUsuario, Contraseña FROM Usuario WHERE NombreUsuario = @nombreUsuario AND Contraseña = @contrseña";
 
                     SqlParameter nombreUsuarioParameter = new SqlParameter("nombreUsuario", SqlDbType.VarChar);
-                    nombreUsuarioParameter.Value = usuario.NombreUsuario;
+                    nombreUsuarioParameter.Value = nombreUsuario;
 
                     SqlParameter contraseñaParameter = new SqlParameter("contraseña", SqlDbType.VarChar);
-                    contraseñaParameter.Value = usuario.Contraseña;
+                    contraseñaParameter.Value = contraseña;
 
                     sqlConnection.Open();
 
-                    using (SqlCommand sqlCommand = new SqlCommand(querySelect, sqlConnection))
+                    using (SqlCommand sqlCommand = new SqlCommand(queryUser, sqlConnection))
                     {
                         sqlCommand.Parameters.Add(nombreUsuarioParameter);
                         sqlCommand.Parameters.Add(contraseñaParameter);
-                        sqlCommand.ExecuteScalar();
+                        int usuarioNoEncontrado = sqlCommand.ExecuteNonQuery();
+
+                        if (usuarioNoEncontrado == 0)
+                        {
+                            Console.WriteLine("Usuario no encontrado");
+                        }
                     }
 
                     sqlConnection.Close();
@@ -183,6 +190,7 @@ namespace ProyectoFinalConsola.Handlers
             {
                 Console.WriteLine(ex.Message);
             }
+            return usuario;
         }
     }
 }
