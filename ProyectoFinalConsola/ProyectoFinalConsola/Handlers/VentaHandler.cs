@@ -32,7 +32,7 @@ namespace ProyectoFinalConsola.Handlers
                             {
                                 Venta venta = new Venta();
 
-                                venta.IdVenta = Convert.ToInt32(dataReader["Id"]);
+                                venta.Id = Convert.ToInt32(dataReader["Id"]);
                                 venta.Comentarios = dataReader["Comentarios"].ToString();
                             }
                         }
@@ -60,7 +60,7 @@ namespace ProyectoFinalConsola.Handlers
                             {
                                 Venta venta = new Venta();
 
-                                venta.IdVenta = Convert.ToInt32(dataReader["Id"]);
+                                venta.Id = Convert.ToInt32(dataReader["Id"]);
                                 venta.Comentarios = dataReader["Comentarios"].ToString();
                             }
                         }
@@ -149,7 +149,7 @@ namespace ProyectoFinalConsola.Handlers
 
                     parametroVentaId.ParameterName = "idVenta";
                     parametroVentaId.SqlDbType = System.Data.SqlDbType.BigInt;
-                    parametroVentaId.Value = venta.IdVenta;
+                    parametroVentaId.Value = venta.Id;
 
                     sqlConnection.Open();
 

@@ -28,7 +28,7 @@ namespace ProyectoFinalConsola.Handlers
                             {
                                 ProductoVendido productoVendidos = new ProductoVendido();
 
-                                productoVendidos.IdProductoVendido = Convert.ToInt32(dataReader["Id"]);
+                                productoVendidos.Id = Convert.ToInt32(dataReader["Id"]);
                                 productoVendidos.Stock = Convert.ToInt32(dataReader["Stock"]);
                                 productoVendidos.IdProducto = Convert.ToInt32(dataReader["IdProducto"]);
                                 productoVendidos.IdVenta = Convert.ToInt32(dataReader["IdVenta"]);
@@ -60,7 +60,7 @@ namespace ProyectoFinalConsola.Handlers
                             {
                                 ProductoVendido productoVendidos = new ProductoVendido();
 
-                                productoVendidos.IdProductoVendido = Convert.ToInt32(dataReader["Id"]);
+                                productoVendidos.Id = Convert.ToInt32(dataReader["Id"]);
                                 productoVendidos.Stock = Convert.ToInt32(dataReader["Stock"]);
                                 productoVendidos.IdProducto = Convert.ToInt32(dataReader["IdProducto"]);
                                 productoVendidos.IdVenta = Convert.ToInt32(dataReader["IdVenta"]);
@@ -107,7 +107,7 @@ namespace ProyectoFinalConsola.Handlers
                 string queryDelete = "DELETE FROM ProductoVendido WHERE Id = @idProductoVendido";
 
                 SqlParameter sqlParameter = new SqlParameter("idUsuario", SqlDbType.BigInt);
-                sqlParameter.Value = productoVendido.IdProductoVendido;
+                sqlParameter.Value = productoVendido.Id;
 
                 sqlConnection.Open();
 

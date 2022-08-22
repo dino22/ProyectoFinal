@@ -56,7 +56,7 @@ namespace ProyectoFinalConsola.Handlers
                             {
                                 Usuario usuario = new Usuario();
 
-                                usuario.IdUsuario = Convert.ToInt32(dataReader["Id"]);
+                                usuario.Id = Convert.ToInt32(dataReader["Id"]);
                                 usuario.Nombre = dataReader["Nombre"].ToString();
                                 usuario.NombreUsuario = dataReader["NombreUsuario"].ToString();
                                 usuario.Apellido = dataReader["Apellido"].ToString();
@@ -108,7 +108,7 @@ namespace ProyectoFinalConsola.Handlers
                 string queryDelete = "DELETE FROM Usuario WHERE Id = @idUsuario";
 
                 SqlParameter sqlParameter = new SqlParameter("idUsuario", SqlDbType.BigInt);
-                sqlParameter.Value = usuario.IdUsuario;
+                sqlParameter.Value = usuario.Id;
 
                 sqlConnection.Open();
 
@@ -138,7 +138,7 @@ namespace ProyectoFinalConsola.Handlers
 
                 parametroUsuarioId.ParameterName = "idUsuario";
                 parametroUsuarioId.SqlDbType = System.Data.SqlDbType.BigInt;
-                parametroUsuarioId.Value = usuario.IdUsuario;
+                parametroUsuarioId.Value = usuario.Id;
 
                 sqlConnection.Open();
 

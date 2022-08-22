@@ -8,7 +8,7 @@ namespace ProyectoFinalConsola.Model
 {
     public class Usuario
     {
-        private int _idUsuario;
+        private int _id;
         private string _nombre;
         private string _apellido;
         private string _nombreUsuario;
@@ -16,9 +16,9 @@ namespace ProyectoFinalConsola.Model
         private string _mail;
 
         //Constructor
-        public Usuario(int idUsuario, string nombre, string apellido, string nombreUsuario, string contraseña, string mail)
+        public Usuario(int id, string nombre, string apellido, string nombreUsuario, string contraseña, string mail)
         {
-            this._idUsuario = idUsuario;
+            this._id = id;
             this._nombre = nombre;
             this._apellido = apellido;
             this._nombreUsuario = nombreUsuario;
@@ -27,10 +27,10 @@ namespace ProyectoFinalConsola.Model
         }
 
         //Getters y Setters
-        public int IdUsuario
+        public int Id
         {
-            get { return this._idUsuario; }
-            set { this._idUsuario = value; }
+            get { return this._id; }
+            set { this._id = value; }
         }
         public string Nombre
         {

@@ -470,19 +470,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dinom\\.nuget\\packages\\": {}
+    "C:\\Users\\dmontrucchio\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dinom\\Documents\\GitHub\\ProyectoFinal\\ProyectoFinalConsola\\ProyectoFinalConsola\\ProyectoFinalConsola.csproj",
+      "projectUniqueName": "C:\\Users\\dmontrucchio\\Documents\\GitHub\\ProyectoFinal\\ProyectoFinalConsola\\ProyectoFinalConsola\\ProyectoFinalConsola.csproj",
       "projectName": "ProyectoFinalConsola",
-      "projectPath": "C:\\Users\\dinom\\Documents\\GitHub\\ProyectoFinal\\ProyectoFinalConsola\\ProyectoFinalConsola\\ProyectoFinalConsola.csproj",
-      "packagesPath": "C:\\Users\\dinom\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dinom\\Documents\\GitHub\\ProyectoFinal\\ProyectoFinalConsola\\ProyectoFinalConsola\\obj\\",
+      "projectPath": "C:\\Users\\dmontrucchio\\Documents\\GitHub\\ProyectoFinal\\ProyectoFinalConsola\\ProyectoFinalConsola\\ProyectoFinalConsola.csproj",
+      "packagesPath": "C:\\Users\\dmontrucchio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dmontrucchio\\Documents\\GitHub\\ProyectoFinal\\ProyectoFinalConsola\\ProyectoFinalConsola\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dinom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dmontrucchio\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

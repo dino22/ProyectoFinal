@@ -8,21 +8,21 @@ namespace ProyectoFinalConsola.Model
 {
     public class Venta
     {
-        private int _idVenta;
+        private int _id;
         public string _comentarios;
 
         //Constructor
-        public Venta(int idVenta, string comentarios)
+        public Venta(int id, string comentarios)
         {
-            this._idVenta = idVenta;
+            this._id = id;
             this._comentarios = comentarios;
         }
 
         //Getters y Setters
-        public int IdVenta
+        public int Id
         {
-            get { return this._idVenta; }
-            set { this._idVenta = value; }
+            get { return this._id; }
+            set { this._id = value; }
         }
         public string Comentarios
         {

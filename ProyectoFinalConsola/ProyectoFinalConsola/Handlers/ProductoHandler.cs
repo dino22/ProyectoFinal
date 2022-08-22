@@ -14,31 +14,35 @@ namespace ProyectoFinalConsola.Handlers
         public List<Producto> TraerProducto(int idUsuario)
         {
             List<Producto> productos = new List<Producto>();
+
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Producto WHERE IdUsuario = @idUsuario", sqlConnection))
+                using (SqlCommand sqlCommand = new SqlCommand())
                 {
-                    sqlConnection.Open();
+                    sqlCommand.Connection = sqlConnection;
+                    sqlCommand.Connection.Open();
+                    sqlCommand.CommandText = "SELECT * FROM Producto WHERE IdUsuario = @idUsuario";
+                    sqlCommand.Parameters.AddWithValue("@idUsuario", idUsuario);
 
-                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                    dataAdapter.SelectCommand = sqlCommand;
+                    DataTable table = new DataTable();
+                    dataAdapter.Fill(table);
+                    sqlConnection.Close();
+
+                    foreach(DataRow row in table.Rows)
                     {
-                        if (dataReader.HasRows)
-                        {
-                            while (dataReader.Read())
-                            {
-                                Producto producto = new Producto();
+                        Producto producto = new Producto();
+                        producto.Id = Convert.ToInt32(row["id"]);
+                        producto.Descripciones = row["Descripciones"].ToString();
+                        producto.Costo = Convert.ToInt32(row["Costo"]);
+                        producto.PrecioVenta = Convert.ToInt32(row["PrecioVenta"]);
+                        producto.Stock = Convert.ToInt32(row["Stock"]);
+                        producto.IdUsuario = Convert.ToInt32(row["idUsuario"]);
 
-                                producto.IdProducto = Convert.ToInt32(dataReader["Id"]);
-                                producto.Descripciones = dataReader["Descripciones"].ToString();
-                                producto.Costo = Convert.ToInt32(dataReader["Costo"]);
-                                producto.PrecioVenta = Convert.ToInt32(dataReader["PrecioVenta"]);
-                                producto.Stock = Convert.ToInt32(dataReader["Stock"]);
-                                producto.IdUsuario = Convert.ToInt32(dataReader["IdUsuario"]);
-                            }
-                        }
+                        productos.Add(producto);
                     }
 
-                    sqlConnection.Close();
                 }
             }
             return productos;
@@ -80,7 +84,7 @@ namespace ProyectoFinalConsola.Handlers
                 string queryDelete = "DELETE FROM Productio WHERE Id = @idProducto";
 
                 SqlParameter sqlParameter = new SqlParameter("idProducto", SqlDbType.BigInt);
-                sqlParameter.Value = producto.IdProducto;
+                sqlParameter.Value = producto.Id;
 
                 sqlConnection.Open();
 
@@ -110,7 +114,7 @@ namespace ProyectoFinalConsola.Handlers
 
                 parametroUsuarioId.ParameterName = "idProducto";
                 parametroUsuarioId.SqlDbType = System.Data.SqlDbType.BigInt;
-                parametroUsuarioId.Value = producto.IdProducto;
+                parametroUsuarioId.Value = producto.Id;
 
                 sqlConnection.Open();
 

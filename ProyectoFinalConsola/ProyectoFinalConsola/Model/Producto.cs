@@ -8,7 +8,7 @@ namespace ProyectoFinalConsola.Model
 {
     public class Producto
     {
-        private int _idProducto;
+        private int _id;
         private string _descripciones;
         private double _costo;
         private double _precioVenta;
@@ -16,9 +16,9 @@ namespace ProyectoFinalConsola.Model
         private int _idUsuario;
 
         //Constructor
-        public Producto(int idProducto, string descripciones, double costo, double precioVenta, int stock, int idUsuario)
+        public Producto(int id, string descripciones, double costo, double precioVenta, int stock, int idUsuario)
         {
-            this._idProducto = idProducto;
+            this._id = id;
             this._descripciones = descripciones;
             this._costo = costo;
             this._precioVenta = precioVenta;
@@ -27,10 +27,10 @@ namespace ProyectoFinalConsola.Model
         }
 
         //Getters y Setters
-        public int IdProducto
+        public int Id
         {
-            get { return this._idProducto; }
-            set { this._idProducto = value; }
+            get { return this._id; }
+            set { this._id = value; }
         }
         public string Descripciones
         {
