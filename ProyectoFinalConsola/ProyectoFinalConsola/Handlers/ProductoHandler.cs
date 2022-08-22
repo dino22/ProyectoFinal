@@ -11,12 +11,12 @@ namespace ProyectoFinalConsola.Handlers
 {
     public class ProductoHandler : DbHandler
     {
-        public List<Producto> TraerProductos()
+        public List<Producto> TraerProducto(int idUsuario)
         {
             List<Producto> productos = new List<Producto>();
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Producto", sqlConnection))
+                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Producto WHERE IdUsuario = @idUsuario", sqlConnection))
                 {
                     sqlConnection.Open();
 
@@ -30,10 +30,10 @@ namespace ProyectoFinalConsola.Handlers
 
                                 producto.IdProducto = Convert.ToInt32(dataReader["Id"]);
                                 producto.Descripciones = dataReader["Descripciones"].ToString();
-                                producto.Stock = Convert.ToInt32(dataReader["Stock"]);
-                                producto.IdUsuario = Convert.ToInt32(dataReader["IdUsuario"]);
                                 producto.Costo = Convert.ToInt32(dataReader["Costo"]);
                                 producto.PrecioVenta = Convert.ToInt32(dataReader["PrecioVenta"]);
+                                producto.Stock = Convert.ToInt32(dataReader["Stock"]);
+                                producto.IdUsuario = Convert.ToInt32(dataReader["IdUsuario"]);
                             }
                         }
                     }

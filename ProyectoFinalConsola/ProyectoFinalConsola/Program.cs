@@ -8,29 +8,27 @@ namespace ProyectoFinalConsola
     {
         static void Main(string[] args)
         {
-            LoginHandler usuarioIn = new LoginHandler();
-
-            usuarioIn.ValidarUsuario(Usuario usuario);
+            int idUsuario = 2;
 
 
             ProductoHandler productoHandler = new ProductoHandler();
 
-            productoHandler.TraerProductos();
+            productoHandler.TraerProducto(idUsuario);
 
             
             UsuarioHandler usuarioHandler = new UsuarioHandler();
 
-            usuarioHandler.TraerUsuarios();
+            usuarioHandler.TraerUsuario(idUsuario);
 
             
             ProductoVendidoHandler productoVendidoHandler = new ProductoVendidoHandler();
 
-            productoVendidoHandler.TraerProductoVendidos();
+            productoVendidoHandler.TraerProductoVendido(idUsuario);
 
 
             VentaHandler ventaHandler = new VentaHandler();
 
-            ventaHandler.TraerVentas();
+            ventaHandler.TraerVenta(idUsuario);
         }
     }
 }

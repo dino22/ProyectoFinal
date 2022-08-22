@@ -6,11 +6,43 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace ProyectoFinalConsola.Handlers
 {
     public class VentaHandler : DbHandler
     {
+        
+        
+
+        public List<Venta> TraerVenta(int idUaurio)
+        {
+            List<Venta> ventas = new List<Venta>();
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand("SELECT U.NombreUsuario, PV.Stock, P.Descripciones, P.Costo, P.PrecioVenta FROM ProductoVendido PV INNER JOIN Producto P ON P.Id = PV.IdProducto INNER JOIN Usuario U ON U.Id = P.IdUsuario", sqlConnection))
+                {
+                    sqlConnection.Open();
+
+                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
+                    {
+                        if (dataReader.HasRows)
+                        {
+                            while (dataReader.Read())
+                            {
+                                Venta venta = new Venta();
+
+                                venta.IdVenta = Convert.ToInt32(dataReader["Id"]);
+                                venta.Comentarios = dataReader["Comentarios"].ToString();
+                            }
+                        }
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+            return ventas;
+        }
         public List<Venta> TraerVentas()
         {
             List<Venta> ventas = new List<Venta>();

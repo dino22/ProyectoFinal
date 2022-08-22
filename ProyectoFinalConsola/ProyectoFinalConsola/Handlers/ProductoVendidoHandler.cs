@@ -11,6 +11,38 @@ namespace ProyectoFinalConsola.Handlers
 {
     public class ProductoVendidoHandler : DbHandler
     {
+        public List<ProductoVendido> TraerProductoVendido(int idUsuario)
+        {
+            List<ProductoVendido> productoVendido = new List<ProductoVendido>();
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand("SELECT P.Descripciones, P.Costo, P.PrecioVenta, P.Stock, U.NombreUsuario FROM Producto P INNER JOIN Usuario U ON U.Id = P.IdUsuario", sqlConnection))
+                {
+                    sqlConnection.Open();
+
+                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
+                    {
+                        if (dataReader.HasRows)
+                        {
+                            while (dataReader.Read())
+                            {
+                                ProductoVendido productoVendidos = new ProductoVendido();
+
+                                productoVendidos.IdProductoVendido = Convert.ToInt32(dataReader["Id"]);
+                                productoVendidos.Stock = Convert.ToInt32(dataReader["Stock"]);
+                                productoVendidos.IdProducto = Convert.ToInt32(dataReader["IdProducto"]);
+                                productoVendidos.IdVenta = Convert.ToInt32(dataReader["IdVenta"]);
+
+                            }
+                        }
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+            return productoVendido;
+        }
+
         public List<ProductoVendido> TraerProductoVendidos()
         {
             List<ProductoVendido> productoVendido = new List<ProductoVendido>();
