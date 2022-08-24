@@ -1,4 +1,7 @@
 # Folders
+/.vs
+/obj
+/bin
 .vs
 obj
 bin
