@@ -8,7 +8,14 @@ namespace ProyectoFinalConsola.Model
 {
     public class Producto
     {
-        private int _id;
+        public int Id { get; set; }
+        public string Descripciones { get; set; }
+        public double Costo { get; set; }
+        public double PrecioVenta { get; set; }
+        public int Stock { get; set; }
+        public int IdUsuario { get; set; }
+
+        /*private int _id;
         private string _descripciones;
         private double _costo;
         private double _precioVenta;
@@ -56,7 +63,7 @@ namespace ProyectoFinalConsola.Model
         {
             get { return this._idUsuario; }
             set { this._idUsuario = value; }
-        }
+        }*/
 
     }
 }

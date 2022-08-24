@@ -8,7 +8,10 @@ namespace ProyectoFinalConsola.Model
 {
     public class Venta
     {
-        private int _id;
+        public int Id { get; set; }
+        public string Comentarios { get; set; }
+        
+        /*private int _id;
         public string _comentarios;
 
         //Constructor
@@ -28,7 +31,7 @@ namespace ProyectoFinalConsola.Model
         {
             get { return this._comentarios; }
             set { this._comentarios = value; }
-        }
+        }*/
 
     }
 }

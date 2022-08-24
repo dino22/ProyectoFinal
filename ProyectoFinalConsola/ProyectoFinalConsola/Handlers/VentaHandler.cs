@@ -12,17 +12,21 @@ namespace ProyectoFinalConsola.Handlers
 {
     public class VentaHandler : DbHandler
     {
-        
-        
-
-        public List<Venta> TraerVenta(int idUaurio)
+        public List<Venta> TraerVenta(int idUsuario)
         {
             List<Venta> ventas = new List<Venta>();
+
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand("SELECT U.NombreUsuario, PV.Stock, P.Descripciones, P.Costo, P.PrecioVenta FROM ProductoVendido PV INNER JOIN Producto P ON P.Id = PV.IdProducto INNER JOIN Usuario U ON U.Id = P.IdUsuario", sqlConnection))
+                string querySelect = "SELECT U.NombreUsuario, PV.Stock, P.Descripciones, P.Costo, P.PrecioVenta, V.Comentarios FROM ProductoVendido PV INNER JOIN Producto P ON P.Id = PV.IdProducto INNER JOIN Usuario U ON U.Id = P.IdUsuario INNER JOIN Venta V ON V.Id = PV.IdVenta WHERE U.Id = @idUsuario";
+
+                SqlParameter idUsuarioParameter = new SqlParameter("IdUsuario", System.Data.SqlDbType.BigInt) { Value = idUsuario };
+                
+                sqlConnection.Open();
+                
+                using (SqlCommand sqlCommand = new SqlCommand(querySelect, sqlConnection))
                 {
-                    sqlConnection.Open();
+                    sqlCommand.Parameters.Add(idUsuarioParameter);
 
                     using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
                     {
@@ -31,9 +35,18 @@ namespace ProyectoFinalConsola.Handlers
                             while (dataReader.Read())
                             {
                                 Venta venta = new Venta();
-
-                                venta.Id = Convert.ToInt32(dataReader["Id"]);
                                 venta.Comentarios = dataReader["Comentarios"].ToString();
+
+                                Producto producto = new Producto();
+                                producto.Descripciones = dataReader["Descripciones"].ToString();
+                                producto.Costo = Convert.ToDouble(dataReader["Costo"]);
+                                producto.PrecioVenta = Convert.ToDouble(dataReader["PrecioVenta"]);
+
+                                Usuario usuario = new Usuario();
+                                usuario.NombreUsuario = dataReader["NombreUsuario"].ToString();
+
+                                ProductoVendido productoVendido = new ProductoVendido();
+                                productoVendido.Stock = Convert.ToInt32(dataReader["Stock"]);
                             }
                         }
                     }
@@ -141,7 +154,7 @@ namespace ProyectoFinalConsola.Handlers
 
                     SqlParameter parametroNuevoComentario = new SqlParameter();
 
-                    parametroNuevoComentario.ParameterName = "nuevaComentario";
+                    parametroNuevoComentario.ParameterName = "nuevoComentario";
                     parametroNuevoComentario.SqlDbType = System.Data.SqlDbType.VarChar;
                     parametroNuevoComentario.Value = venta.Comentarios;
 

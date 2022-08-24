@@ -17,14 +17,14 @@ namespace ProyectoFinalConsola
 
             productoHandler.TraerProducto(idUsuario);
 
-            
+
             UsuarioHandler usuarioHandler = new UsuarioHandler();
 
             usuarioHandler.TraerUsuario(idUsuario);
 
             usuarioHandler.ValidarUsuario(nombreUsuario, contraseña);
 
-            
+
             ProductoVendidoHandler productoVendidoHandler = new ProductoVendidoHandler();
 
             productoVendidoHandler.TraerProductoVendido(idUsuario);

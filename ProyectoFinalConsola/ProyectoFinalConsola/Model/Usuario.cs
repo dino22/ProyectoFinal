@@ -8,7 +8,14 @@ namespace ProyectoFinalConsola.Model
 {
     public class Usuario
     {
-        private int _id;
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string NombreUsuario { get; set; }
+        public string Contraseña { get; set; }
+        public string Mail { get; set; }
+
+        /*private int _id;
         private string _nombre;
         private string _apellido;
         private string _nombreUsuario;
@@ -56,7 +63,7 @@ namespace ProyectoFinalConsola.Model
         {
             get { return this._mail; }
             set { this._mail = value; }
-        }
+        }*/
 
     }
 }

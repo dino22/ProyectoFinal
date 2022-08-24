@@ -13,12 +13,19 @@ namespace ProyectoFinalConsola.Handlers
     {
         public List<ProductoVendido> TraerProductoVendido(int idUsuario)
         {
-            List<ProductoVendido> productoVendido = new List<ProductoVendido>();
+            List<ProductoVendido> productosVendidos = new List<ProductoVendido>();
+
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand("SELECT P.Descripciones, P.Costo, P.PrecioVenta, P.Stock, U.NombreUsuario FROM Producto P INNER JOIN Usuario U ON U.Id = P.IdUsuario", sqlConnection))
+                string querySelect = "SELECT P.IdUsuario, PV.IdProducto, P.Descripciones, PV.Stock, P.PrecioVenta FROM ProductoVendido PV INNER JOIN Producto P ON PV.IdProducto = P.Id WHERE P.IdUsuario = @IdUsuario";
+
+                SqlParameter idUsuarioParameter = new SqlParameter("IdUsuario", System.Data.SqlDbType.BigInt) { Value = idUsuario };
+
+                sqlConnection.Open();
+
+                using (SqlCommand sqlCommand = new SqlCommand(querySelect, sqlConnection))
                 {
-                    sqlConnection.Open();
+                    sqlCommand.Parameters.Add(idUsuarioParameter);
 
                     using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
                     {
@@ -27,12 +34,15 @@ namespace ProyectoFinalConsola.Handlers
                             while (dataReader.Read())
                             {
                                 ProductoVendido productoVendidos = new ProductoVendido();
-
-                                productoVendidos.Id = Convert.ToInt32(dataReader["Id"]);
-                                productoVendidos.Stock = Convert.ToInt32(dataReader["Stock"]);
                                 productoVendidos.IdProducto = Convert.ToInt32(dataReader["IdProducto"]);
-                                productoVendidos.IdVenta = Convert.ToInt32(dataReader["IdVenta"]);
+                                productoVendidos.Stock = Convert.ToInt32(dataReader["Stock"]);
 
+                                Producto producto = new Producto();
+                                producto.Descripciones = dataReader["Descripciones"].ToString();
+                                producto.PrecioVenta = Convert.ToInt32(dataReader["PrecioVenta"]);
+
+                                Usuario usuario = new Usuario();
+                                usuario.Id = Convert.ToInt32(dataReader["IdUsuario"]);
                             }
                         }
                     }
@@ -40,7 +50,7 @@ namespace ProyectoFinalConsola.Handlers
                     sqlConnection.Close();
                 }
             }
-            return productoVendido;
+            return productosVendidos;
         }
 
         public List<ProductoVendido> TraerProductoVendidos()
@@ -79,8 +89,7 @@ namespace ProyectoFinalConsola.Handlers
         {
             using (SqlConnection sqlConnection = new SqlConnection())
             {
-                string queryInsert = "INSERT INTO ProductoVendido (Stock, IdProcuto, IdVenta)" +
-                    " VALUES (@Stock, @IdProducto, @IdVenta)";
+                string queryInsert = "INSERT INTO ProductoVendido (Stock, IdProcuto, IdVenta) VALUES (@Stock, @IdProducto, @IdVenta)";
 
                 SqlParameter stockParameter = new SqlParameter("Stock", SqlDbType.Int) { Value = productoVendido.Stock };
                 SqlParameter idProductoParameter = new SqlParameter("IdProducto", SqlDbType.BigInt) { Value = productoVendido.IdProducto };
