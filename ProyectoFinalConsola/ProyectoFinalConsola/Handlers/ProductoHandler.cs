@@ -56,10 +56,10 @@ namespace ProyectoFinalConsola.Handlers
                     " VALUES (@Descripciones, @Costo, @PrecioVenta, @Stock, @IdUsuario)";
 
                 SqlParameter descripcionesParameter = new SqlParameter("Descripciones", SqlDbType.VarChar) { Value = producto.Descripciones };
-                SqlParameter costoParameter = new SqlParameter("Costo", SqlDbType.Int) { Value = producto.Costo };
-                SqlParameter precioVentaParameter = new SqlParameter("PrecioVenta", SqlDbType.VarChar) { Value = producto.PrecioVenta };
+                SqlParameter costoParameter = new SqlParameter("Costo", SqlDbType.Money) { Value = producto.Costo };
+                SqlParameter precioVentaParameter = new SqlParameter("PrecioVenta", SqlDbType.Money) { Value = producto.PrecioVenta };
                 SqlParameter stockParameter = new SqlParameter("Stock", SqlDbType.Int) { Value = producto.Stock };
-                SqlParameter idUsuarioParameter = new SqlParameter("IdUsuario", SqlDbType.Int) { Value = producto.IdUsuario };
+                SqlParameter idUsuarioParameter = new SqlParameter("IdUsuario", SqlDbType.BigInt) { Value = producto.IdUsuario };
 
                 sqlConnection.Open();
 
